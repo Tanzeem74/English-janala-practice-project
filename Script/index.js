@@ -15,14 +15,23 @@ const loadLevelWord=(id)=>{
 const displayLevelWord=(words)=>{
     const wordContainer=document.getElementById('word-container');
     wordContainer.innerHTML="";
+    if(words.length==0){
+        wordContainer.innerHTML=`
+            <div class="text-center col-span-full space-y-4">
+            <img src="./assets/alert-error.png" alt="" class="mx-auto">
+            <p class="font-bangla text-[#79716b]">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি। </p>
+            <h2 class="text-xl font-semibold font-bangla">নেক্সট Lesson এ যান</h2>
+            </div>
+        `;
+    }
     words.forEach(word => {
-        console.log(word);
+        //console.log(word);
         const card=document.createElement("div");
         card.innerHTML=`
             <div class="bg-white p-5 text-center rounded-xl shadow-sm space-y-4">
-            <h3 class="text-2xl font-bold"> ${word.word} </h3>
+            <h3 class="text-2xl font-bold"> ${word.word?word.word:"word not found"} </h3>
             <p class="font-normal">Meaning/Pronunctuation</p>
-            <p class="text-xl font-semibold font-bangla">${word.meaning}/${word.pronunciation}</p>
+            <p class="text-xl font-semibold font-bangla">${word.meaning?word.meaning:"meaning not found"}/${word.pronunciation?word.pronunciation:"Pronunciation not found"}</p>
             <div class=" flex justify-between items-center mt-10">
                 <button class="btn bg-[#1a91ff1a] rounded-lg hover:bg-sky-300"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="btn bg-[#1a91ff1a] rounded-lg hover:bg-sky-300"><i class="fa-solid fa-volume-high"></i></button>
